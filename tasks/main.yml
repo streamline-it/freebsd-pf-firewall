@@ -1,0 +1,17 @@
+---
+# tasks file for freebsd-pf-firewall
+
+- name: ensure pf is configured
+  notify: restart pf
+  ansible.builtin.template:
+    src: pf.conf.j2
+    dest: /etc/pf.conf
+    owner: root
+    group: wheel
+    mode: '0600'
+
+- name: ensure pf service is started/enabled
+  ansible.builtin.service:
+    name: pf
+    enabled: true
+    state: started

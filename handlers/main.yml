@@ -1,0 +1,6 @@
+---
+# handlers file for freebsd-pf-firewall
+- name: restart pf
+  ansible.builtin.service:
+    name: pf
+    state: reloaded
