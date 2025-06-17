@@ -21,6 +21,8 @@ firewall_pf_int_groupname:
 # should be for instance for a 10.0.0.0/24 network be set to 10.0.0.0/24
 firewall_pf_mynetwork:
 
+# used to control base ingress traffic
+firewall_pf_myhostip:
 
 # For the firewall_pf_tcp/udp_svcs_in/out variables see example below in how to express them.
 # Must lead with a comma because there will be existing services preceeding the contents of
