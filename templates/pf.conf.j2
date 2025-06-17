@@ -5,6 +5,7 @@
 # **************************************************************************************
 
 # default macros
+my_network="{ {{ firewall_pf_mynetwork }} }"
 tcp_in="{ ssh, domain{{ firewall_pf_tcp_svcs_in }} }"
 udp_in="{ ssh, domain{{ firewall_pf_udp_svcs_in }} }"
 tcp_out="{ ssh, domain, http, https{{ firewall_pf_tcp_svcs_out }} }"
@@ -24,8 +25,8 @@ block in log all
 set skip on lo
 
 # ingress rules
-pass in log on {{ firewall_pf_int_groupname }} proto tcp to port $tcp_in keep state
-pass in log on {{ firewall_pf_int_groupname }} proto udp to port $udp_in keep state
+pass in log on {{ firewall_pf_int_groupname }} proto tcp from $my_network to port $tcp_in keep state
+pass in log on {{ firewall_pf_int_groupname }} proto udp from $my_network to port $udp_in keep state
 
 # custom ingress rules
 {%- for item in firewall_pf_ingress_rules %}
