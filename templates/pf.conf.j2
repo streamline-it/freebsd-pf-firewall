@@ -39,8 +39,8 @@ pass in log on {{ firewall_pf_int_groupname }} proto udp from $my_network to $my
 
 # egress rules
 
-pass out log on {{ firewall_pf_int_groupname }} proto tcp to port $tcp_out 
-pass out log on {{ firewall_pf_int_groupname }} proto udp to port $udp_out
+pass out log on {{ firewall_pf_int_groupname }} proto tcp to port $tcp_out keep state 
+pass out log on {{ firewall_pf_int_groupname }} proto udp to port $udp_out keep state
 pass inet proto icmp icmp-type $icmp_types
 
 # custom egress rules
