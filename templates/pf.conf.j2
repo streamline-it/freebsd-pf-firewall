@@ -7,10 +7,10 @@
 # default macros
 my_network="{ {{ firewall_pf_mynetwork }} }"
 my_hostip="{ {{ firewall_pf_myhostip }} }"
-tcp_in="{ ssh, domain{{ firewall_pf_tcp_svcs_in }} }"
-udp_in="{ ssh, domain{{ firewall_pf_udp_svcs_in }} }"
-tcp_out="{ ssh, domain, http, https{{ firewall_pf_tcp_svcs_out }} }"
-udp_out="{ ssh, domain{{ firewall_pf_udp_svcs_out }} }"
+tcp_in="{ ssh domain{{ firewall_pf_tcp_svcs_in }} }"
+udp_in="{ ssh domain{{ firewall_pf_udp_svcs_in }} }"
+tcp_out="{ ssh domain http https{{ firewall_pf_tcp_svcs_out }} }"
+udp_out="{ ssh domain{{ firewall_pf_udp_svcs_out }} }"
 icmp_types="{ echoreq }"
 
 # custom macros
