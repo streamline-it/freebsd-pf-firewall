@@ -13,12 +13,20 @@ tcp_out="{ ssh domain http https{{ firewall_pf_tcp_svcs_out }} }"
 udp_out="{ ssh domain{{ firewall_pf_udp_svcs_out }} }"
 icmp_types="{ echoreq }"
 
+# printer macros
+{%- if {{ firewall_pf_enable_printers }} == true %}
+{%- for item in firewall_printers_ip4_macros %}
+
+{{ item['macro'] }}
+{%- endfor %}
+
+{%- endif %}
+
 # custom macros
 {%- for item in firewall_pf_macros %}
 
 {{ item['macro'] }}
 {%- endfor %}
-
 
 # filter rules
 set skip on lo
@@ -36,6 +44,15 @@ pass in log on {{ firewall_pf_int_groupname }} proto udp from $my_network to $my
 
 {%- endfor %}
 
+# printer incress rules
+
+{%- if {{ firewall_pf_enable_printers }} == true %}
+
+{%- for item in firewall_printers_ingress_rules %}
+{{ item['rule'] }}
+{%- endfor %}
+
+{%- endif %}
 
 # egress rules
 
@@ -49,3 +66,13 @@ pass inet proto icmp icmp-type $icmp_types
 
 {{ item['rule'] }}
 {%- endfor %}
+
+# printer egress rules
+
+{%- if {{ firewall_pf_enable_printers }} == true %}
+
+{%- for item in firewall_printers_egress_rules %}
+{{ item['rule'] }}
+{%- endfor %}
+
+{%- endif %}

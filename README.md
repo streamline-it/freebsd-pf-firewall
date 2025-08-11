@@ -56,6 +56,14 @@ firewall_pf_macros:
   - macro: 
 
 
+# if true this will controll opening firewall to printers
+# firewall_pf_printer_ingress_rules and firewall_pf_egress_rules must be setup
+firewall_pf_enable_printers: false
+
+# macro definition for the printers IPv4 addresses  
+firewall_pf_printers_ipv4_macro:
+
+
 # Here's how to express an ingress rule for a printer continueing from
 # the example above in the macro example
 #
@@ -71,6 +79,15 @@ firewall_pf_ingress_rules:
 # egress rules here
 firewall_pf_egress_rules:
   - rule: additional egress rule
+
+
+# list printer ingress firewall rule
+firewall_pf_printer_ingress_rules:
+  - rule:
+
+# list printer egress firewall rule
+firewall_pf_printer_egress_rules:
+  - rule:
 
 Dependencies
 ------------
