@@ -66,9 +66,9 @@ firewall_pf_egress_rules:
   - rule: 
 
 # list printer ingress firewall rule
-firewall_pf_printer_ingress_rules:
+firewall_pf_printers_ingress_rules:
   - rule:
 
 # list printer egress firewall rule
-firewall_pf_printer_egress_rules:
+firewall_pf_printers_egress_rules:
   - rule:
