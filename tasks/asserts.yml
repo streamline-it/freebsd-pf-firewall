@@ -1,0 +1,31 @@
+---
+- name: check assertions
+  ansible.builtin.assert:
+    that:
+      - firewall_pf_int_groupname is defined
+      - firewall_pf_int_groupname is truthy
+      - firewall_pf_mynetwork is defined
+      - firewall_pf_mynetwork is truthy
+      - firewall_pf_myhostip is defined
+      - firewall_pf_myhostip is truthy
+      - firewall_pf_tcp_svcs_in is defined
+      - firewall_pf_udp_svcs_in is defined
+      - firewall_pf_tcp_svcs_out is defined
+      - firewall_pf_udp_svcs_out is defined
+      - firewall_pf_macros is defined
+      - firewall_pf_ingress_rules is defined
+      - firewall_pf_egress_rules is defined
+      - firewall_pf_enable_printers is defined
+      - firewall_pf_enable_printers is == true or firewall_pf_enable_printers is == false
+    fail_msg: "Ensure key variables are defined and have values assigned"
+
+- name: ensure printer related variables are defined/have appropriate values
+  when: firewall_pf_enable_printers == true
+  ansible.builtin.assert:
+    that:
+      - firewall_pf_printers_ipv4_macro is defined
+      - firewall_pf_printers_ingress_rules is defined
+      - firewall_pf_printers_ingress_rules is truthy
+      - firewall_pf_printers_egress_rules is defined 
+      - firewall_pf_printers_egress_rules is truthy
+    fail_msg: "Ensure all key printer related variables are defined and have values":

@@ -1,6 +1,9 @@
 ---
 # tasks file for freebsd-pf-firewall
 
+- name: call tasks to check assertions
+  ansible.builtin.include_tasks: asserts.yml
+
 - name: ensure pf is configured
   notify: restart pf
   ansible.builtin.template:
