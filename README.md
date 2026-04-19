@@ -97,11 +97,31 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- name: test freebsd-pf-firewall
+  hosts: node8.freebsd13.example.com
+  become: true
 
-    - hosts: servers
-      roles:
-         - name: freebsd-pf-firewall
+  vars:
+
+    firewall_pf_int_groupname: main_int
+    firewall_pf_int_enable_printers: false
+
+    firewall_pf_macros:
+      - macro: 'nfs_ports="{ nfsd 892 111 lockd nfsd-status }"'
+      - macro: 'nfs_servers="{ 172.16.20.88 }"'
+
+    # ingress rules
+    firewall_pf_ingress_rules:
+      - rule: "pass in log on {{ firewall_pf_int_groupname }} proto {tcp udp} from $nfs_servers port $nfs_ports keep state"
+
+    # egress rules here
+    firewall_pf_egress_rules:
+      - rule: "pass out log on {{ firewall_pf_int_groupname }} proto {tcp udp} to nfs_servers port $nfs_ports keep state"
+
+  roles:
+
+    - name: freebsd-pf-firewall
+
 
 License
 -------
@@ -111,5 +131,6 @@ BSD
 Author Information
 ------------------
 
+Rich O'Hara
 
 
