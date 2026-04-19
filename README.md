@@ -116,7 +116,7 @@ Example Playbook
 
     # egress rules here
     firewall_pf_egress_rules:
-      - rule: "pass out log on {{ firewall_pf_int_groupname }} proto {tcp udp} to nfs_servers port $nfs_ports keep state"
+      - rule: "pass out log on {{ firewall_pf_int_groupname }} proto {tcp udp} to $nfs_servers port $nfs_ports keep state"
 
   roles:
 
